@@ -1,22 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Calendar</title>
-    <link rel="stylesheet" href="calendar.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>GEAR HUB — Calendar</title>
+  <link rel="stylesheet" href="ios-theme.css">
+  <link rel="stylesheet" href="gear-hub.css">
+  <link rel="stylesheet" href="calendar.css">
+  <script defer src="ios-ui.js"></script>
 </head>
+<body>
+  <header class="ios-nav">
+    <div class="bar">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <span class="brand-title">GEAR HUB</span>
+      </div>
+    </div>
+    <div class="ios-large-title">Calendar</div>
+  </header>
 
-
-    <body>
-  <div class="calendar-wrapper">
-  <h1>SEE YOUR EVENTS ON THE CALENDAR</h1>
-  <div class="calendar-container">
-    <iframe src="https://calendar.google.com/calendar/u/0/embed?src=e0111f1254f9113e70eaab3f7466ad7b@group.calendar.google.com&ctz=America/New_York"></iframe>
-  </div>
-  <a href="https://calendar.google.com/" target="_blank" class="button-container">Open Google Calendar</a>
-</div>
-
-
+  <main class="container">
+    <div class="calendar-wrapper">
+      <div class="ios-card">
+        <h1>See your events on the calendar</h1>
+        <div class="calendar-container">
+          <iframe src="https://calendar.google.com/calendar/u/0/embed?src=e0111f1254f9113e70eaab3f7466ad7b@group.calendar.google.com&ctz=America/New_York" title="Google Calendar"></iframe>
+        </div>
+        <a href="https://calendar.google.com/" target="_blank" class="button-container" rel="noopener">Open Google Calendar</a>
+      </div>
+    </div>
+  </main>
 </body>
 </html>
