@@ -27,3 +27,21 @@
 
 /* Legacy navbar hider (we now use .ios-nav) */
 .navbar { display: none !important; }
+
+/* ... existing gear-hub.css content ... */
+
+/* Optional: brand-tinted glass variant */
+.glass.brand {
+  background: rgba(10, 132, 255, 0.18);
+  border: 1px solid rgba(10, 132, 255, 0.38);
+}
+
+/* Ensure legacy .card uses glass */
+.card {
+  background: rgba(188, 170, 170, 0.32);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(188, 170, 170, 1);
+}
