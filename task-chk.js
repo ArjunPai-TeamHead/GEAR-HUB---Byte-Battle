@@ -1,4 +1,4 @@
-// script.js
+// simple to-do
 const taskInput = document.getElementById('task-input');
 const addBtn = document.getElementById('add-btn');
 const taskList = document.getElementById('task-list');
@@ -11,19 +11,19 @@ addBtn.addEventListener('click', () => {
   li.className = 'task-item';
 
   const check = document.createElement('span');
-  check.className = 'checkmark';
+  check.className = 'check';
   check.innerHTML = '○';
+  const taskTextSpan = document.createElement('span');
+  taskTextSpan.className = 'task-text';
+  taskTextSpan.textContent = taskText;
+
   check.addEventListener('click', () => {
     taskTextSpan.classList.toggle('completed');
     check.innerHTML = taskTextSpan.classList.contains('completed') ? '✔️' : '○';
   });
 
-  const taskTextSpan = document.createElement('span');
-  taskTextSpan.className = 'task-text';
-  taskTextSpan.textContent = taskText;
-
   const deleteBtn = document.createElement('button');
-  deleteBtn.className = 'delete-btn';
+  deleteBtn.className = 'delete';
   deleteBtn.innerHTML = '×';
   deleteBtn.addEventListener('click', () => {
     taskList.removeChild(li);
