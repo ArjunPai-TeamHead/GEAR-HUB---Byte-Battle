@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>EduKit — File Explorer (Windows style)</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="fileorganizer.css" />
+  <script defer src="fileorganizer.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="nav-left">
+      <button id="backBtn" class="nav-btn" title="Back">◀</button>
+      <button id="forwardBtn" class="nav-btn" title="Forward">▶</button>
+      <button id="upBtn" class="nav-btn" title="Up">⬆</button>
+      <button id="refreshBtn" class="nav-btn" title="Refresh">⟳</button>
+    </div>
+
+    <div class="brand">EduKit • Files</div>
+
+    <div class="tools">
+      <input id="search" placeholder="Search files or tags..." aria-label="Search" />
+      <select id="sort">
+        <option value="date">Sort: Recent</option>
+        <option value="name">Name</option>
+        <option value="size">Size</option>
+        <option value="type">Type</option>
+      </select>
+
+      <button id="newFolder" class="btn">New Folder</button>
+      <label class="btn upload-btn">Upload
+        <input id="fileInput" type="file" multiple hidden>
+      </label>
+      <button id="clearAll" class="btn danger" title="Clear stored state">Clear All</button>
+    </div>
+  </header>
+
+  <main class="main">
+    <aside class="sidebar" aria-label="Folders & Quick">
+      <div class="sidebar-section top">
+        <div class="sidebar-title">Quick Access</div>
+        <button class="ghost quick" data-view="__all">All files</button>
+        <button class="ghost quick" data-view="__recent">Recent</button>
+        <button class="ghost quick" data-view="__images">Images</button>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-title">Folders</div>
+        <div id="folderList" class="folder-list" role="list"></div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-title">Tags</div>
+        <div id="tagList" class="tag-list"></div>
+      </div>
+    </aside>
+
+    <section class="content" aria-live="polite">
+      <div class="toolbar">
+        <div id="breadcrumb" class="breadcrumb"></div>
+
+        <div class="view-controls">
+          <button id="gridView" class="view-btn active" title="Grid">Grid</button>
+          <button id="listView" class="view-btn" title="List">List</button>
+        </div>
+      </div>
+
+      <div id="dropzone" class="dropzone">Drag & drop files here or click Upload</div>
+
+      <div class="actions">
+        <div class="left-actions">
+          <button id="selectAll" class="ghost">Select All</button>
+          <button id="deselectAll" class="ghost">Deselect</button>
+          <button id="deleteSelected" class="danger">Delete Selected</button>
+          <button id="undo" class="ghost">Undo</button>
+        </div>
+
+        <div class="right-actions">
+          <select id="moveTo"></select>
+          <button id="moveSelected" class="btn">Move</button>
+          <button id="exportSelected" class="btn">Export JSON</button>
+        </div>
+      </div>
+
+      <div id="fileArea" class="file-area">
+        <div id="fileGrid" class="file-grid" tabindex="0"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Preview Modal -->
+  <div id="previewModal" class="modal hidden" role="dialog" aria-hidden="true">
+    <div class="modal-card">
+      <header class="modal-header">
+        <div id="previewName" class="preview-name">Preview</div>
+        <div class="modal-controls">
+          <button id="downloadBtn" class="btn">Download</button>
+          <button id="renameBtn" class="ghost">Rename</button>
+          <button id="tagBtn" class="ghost">Add Tag</button>
+          <button id="closePreview" class="icon-btn" aria-label="Close">✕</button>
+        </div>
+      </header>
+      <div id="previewBody" class="preview-body"></div>
+    </div>
+  </div>
+
+  <!-- Small modal (rename/tag) -->
+  <div id="smallModal" class="modal hidden" role="dialog" aria-hidden="true">
+    <div class="modal-card small">
+      <header class="modal-header">
+        <div id="smallTitle">Edit</div>
+        <button id="smallClose" class="icon-btn">✕</button>
+      </header>
+      <div class="modal-body">
+        <input id="smallInput" type="text" />
+        <div class="modal-actions">
+          <button id="smallSave" class="btn">Save</button>
+          <button id="smallCancel" class="ghost">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a href="productivitytools.html" class = "back-wa">Return</a>
+</body>
+</html>

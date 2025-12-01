@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Pomodoro Timer</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="pomodoro.js"></script>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="dashboard.html" class="logo">Edukit</a>
+            <a href="productivitytools.html">Back to Tools</a>
+        </div>
+
+        <div class="nav-right">
+            <a href="index.html" class="logout-btn">Logout</a>
+        </div>
+    </nav>
+
+    <div class="pomo-wrapper">
+        <div class="pomo-card">
+            <h2>Pomodoro Timer</h2>
+
+            <!-- Custom settings -->
+            <div class="custom-time">
+                <input type="number" id="workTime" placeholder="Work (min)" min="1" value="25">
+                <input type="number" id="breakTime" placeholder="Break (min)" min="1" value="5">
+                <button id="setTimeBtn">Set Timer</button>
+            </div>
+
+            <div class="timer-display" id="timer">25:00</div>
+
+            <div class="timer-buttons">
+                <button id="startBtn">Start</button>
+                <button id="pauseBtn">Pause</button>
+                <button id="resetBtn">Reset</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

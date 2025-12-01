@@ -1,0 +1,17 @@
+.profile-picture {
+    position: absolute;
+    margin-left: 510px;
+    border: none;
+    
+}
+body {
+    background-color: black;
+}
+p {
+    color: white;
+    text-align: center;
+    font-size: 24px;
+    margin-top: 150px;
+    font-style: Arial, sans-serif;
+    margin-left: -10px;
+}

@@ -1,0 +1,134 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to right, #303338, #000000);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.todo-box {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    width: 350px;
+    box-align: center;
+    margin-left: -10px;
+}
+
+.todo-box h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #000000;
+}
+
+.input-section {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#task-input {
+    flex: 1;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+button {
+    padding: 10px 16px;
+    background-color: #ff7f50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #ff6333;
+}
+
+#task-list {
+    list-style: none;
+    padding: 0;
+}
+
+#task-list li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 0;
+    font-size: 16px;
+    color: #333;
+    transition: all 0.3s ease;
+}
+
+.check {
+    cursor: pointer;
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.task-text {
+    flex: 1;
+}
+
+.delete {
+    cursor: pointer;
+    color: #ff4d4d;
+    font-size: 18px;
+    margin-left: 10px;
+}
+
+.completed .task-text {
+    text-decoration: line-through;
+    color: #888;
+}
+
+
+
+.category-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: -300px;
+    margin-left: 205px;
+    margin-right: 100px;
+}
+
+.category-tabs button {
+    padding: 8px 16px;
+    background-color: #ddd;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.category-tabs button:hover {
+    background-color: #ccc;
+}
+
+.category-tabs button.active {
+    background-color: #ff7f50;
+    color: white;
+}
+.task-body{
+    margin-top: 300px;
+    margin-left: -150px;
+}
+
+
+.text-body {
+  font-size: 1.6rem;       
+  line-height: 2.2rem;    
+  padding: 30px;           
+}
+      
+

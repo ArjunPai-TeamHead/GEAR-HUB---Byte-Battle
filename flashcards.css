@@ -1,0 +1,138 @@
+/* Page title */
+body {
+    background-color: black;
+}
+
+.fc-title {
+    text-align: center;
+    margin-top: 20px;
+    color: white;
+    font-size: 36px;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Input row layout */
+.fc-input-row {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 25px auto;
+    flex-wrap: wrap;
+}
+
+.fc-input-row input {
+    padding: 12px;
+    width: 240px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+}
+
+.fc-input-row button {
+    padding: 12px 20px;
+    background: #4d8bff;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.fc-input-row button:hover {
+    background: #3a73e6;
+}
+
+/* Flashcard grid layout */
+.flashcard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 25px;
+    width: 90%;
+    margin: 30px auto;
+}
+
+/* Card container */
+.flashcard {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+/* The flipping wrapper */
+.flashcard-inner {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.45s ease-in-out;
+    transform-style: preserve-3d;
+    position: relative;
+}
+
+/* When flipped */
+.flashcard.flip .flashcard-inner {
+    transform: rotateY(180deg);
+}
+
+/* Front and back sides */
+.flashcard-front,
+.flashcard-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; /* FIXES the mirrored text problem */
+    border-radius: 16px;
+    padding: 20px;
+    background: white;
+    color: #111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 19px;
+    text-align: center;
+    box-shadow: 0px 8px 18px rgba(0,0,0,0.25);
+    box-sizing: border-box;
+}
+
+/* Back side rotated */
+.flashcard-back {
+    transform: rotateY(180deg);
+    background: #f4f4f4;
+}
+
+/* Delete Button */
+.delete-btn {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 28px;
+    height: 28px;
+    background: #ff3b3b;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 16px;
+    cursor: pointer;
+    z-index: 10;
+    transition: 0.2s;
+}
+
+.delete-btn:hover {
+    background: #c22a2a;
+    transform: scale(1.1);
+}
+.back-way {
+    font-size: 19px;
+    position: relative;
+    top: -150px;
+    text-decoration: none;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    display: inline-block;
+    margin-left: 30px;
+}
+.back-way:hover {
+    text-decoration: underline;
+}
