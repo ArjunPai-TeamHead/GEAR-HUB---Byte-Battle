@@ -1,5 +1,178 @@
-/* ... existing ios-theme.css content ... */
+/* iOS-style glass + vibrancy design system (global) */
+:root {
+  --font-sans: -apple-system, "SF Pro Text", "SF Pro Display", system-ui, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  --radius-xs: 8px; --radius-sm: 10px; --radius-md: 14px; --radius-lg: 18px; --radius-xl: 24px;
+  --blur: 22px;
 
+  /* Accent (you can tweak here) */
+  --tint: #0a84ff;           /* iOS system blue */
+  --tint-pressed: #0a6fe6;
+
+  /* Light */
+  --bg: #f2f2f7;             /* systemGroupedBackground */
+  --surface: rgba(255,255,255,0.72);
+  --popover: rgba(255,255,255,0.86);
+  --label: #000;
+  --secondary: rgba(60,60,67,0.6);
+  --tertiary: rgba(60,60,67,0.3);
+  --separator: rgba(60,60,67,0.36);
+  --fill: rgba(120,120,128,0.12);
+
+  --shadow: 0 0.5px 0 rgba(0,0,0,.25), 0 8px 32px rgba(0,0,0,.06);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #000;
+    --surface: rgba(28,28,30,0.64);
+    --popover: rgba(44,44,46,0.72);
+    --label: #fff;
+    --secondary: rgba(235,235,245,0.6);
+    --tertiary: rgba(235,235,245,0.3);
+    --separator: rgba(84,84,88,0.65);
+    --fill: rgba(118,118,128,0.24);
+    --tint: #0a84ff;
+    --tint-pressed: #0063e2;
+    --shadow: 0 0.5px 0 rgba(255,255,255,.08), 0 10px 40px rgba(0,0,0,.35);
+  }
+}
+
+/* Base */
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--label);
+  background:
+    radial-gradient(1200px 600px at 10% -10%, rgba(10,132,255,.10), transparent 60%),
+    radial-gradient(1000px 500px at 110% 10%, rgba(48,209,88,.10), transparent 55%),
+    var(--bg);
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+}
+a { color: var(--tint); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.container { width: min(1100px, 92vw); margin-inline: auto; padding: 1.25rem 0 5rem; }
+h1, h2, h3 { margin: 0; line-height: 1.12; letter-spacing: -.015em; }
+p { color: var(--secondary); margin: .5rem 0 1rem; }
+.hr { height: 1px; background: var(--separator); transform: scaleY(.5); transform-origin: 0 0; }
+
+/* iOS Nav (glass) */
+.ios-nav {
+  position: sticky; top: 0; z-index: 50;
+  backdrop-filter: saturate(180%) blur(var(--blur));
+  -webkit-backdrop-filter: saturate(180%) blur(var(--blur));
+  background: var(--surface);
+  border-bottom: 0.5px solid var(--separator);
+}
+.ios-nav .bar { display: flex; align-items: center; gap: .75rem; height: 56px; padding: 0 16px; }
+.ios-nav .brand { display: inline-flex; align-items: center; gap: .5rem; font-weight: 800; }
+.ios-nav .brand .logo { width: 26px; height: 26px; border-radius: 8px;
+  background: radial-gradient(120% 120% at 20% 20%, #fff8, transparent), linear-gradient(135deg, var(--tint), color-mix(in oklab, var(--tint), #000 20%));
+  border: 1px solid color-mix(in oklab, var(--tint), transparent 50%);
+  box-shadow: 0 4px 16px color-mix(in oklab, var(--tint), #000 85%);
+}
+.ios-large-title { font-size: clamp(1.9rem, 2.4vw + 1rem, 2.6rem); font-weight: 800; padding: 10px 16px 12px; }
+
+/* Search */
+.ios-search {
+  display: flex; align-items: center; gap: .5rem;
+  height: 36px; padding: 0 12px; margin: 8px 16px 12px;
+  border-radius: 12px; background: var(--fill); color: var(--label);
+}
+.ios-search input { flex: 1; border: 0; background: transparent; outline: none; color: inherit; font-size: 15px; padding: 6px 2px; }
+.ios-search input::placeholder { color: var(--tertiary); }
+
+/* Buttons (global upgrade) */
+button, .button, input[type=submit], input[type=button] {
+  display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+  height: 44px; padding: 0 16px; border-radius: 14px; border: 1px solid transparent;
+  font-weight: 600; background: var(--tint); color: #fff; cursor: pointer;
+  transition: transform .08s ease, background .15s ease, border-color .15s ease;
+}
+button:hover { background: var(--tint-pressed); }
+button:active { transform: translateY(1px); }
+button.ghost { background: color-mix(in oklab, var(--tint), transparent 90%); color: var(--tint); border-color: color-mix(in oklab, var(--tint), transparent 70%); }
+
+/* Inputs & selects */
+input[type=text], input[type=email], input[type=search], input[type=password], input[type=number],
+textarea, select {
+  width: 100%; font: inherit; color: var(--label); height: 44px; padding: 0 12px;
+  border: 1px solid transparent; border-radius: 12px; background: var(--fill);
+  outline: none; transition: box-shadow .15s ease, border-color .15s ease, background .15s ease;
+}
+textarea { height: auto; padding: 10px 12px; }
+input::placeholder, textarea::placeholder { color: var(--tertiary); }
+input:focus, textarea:focus, select:focus {
+  border-color: color-mix(in oklab, var(--tint), transparent 60%);
+  box-shadow: 0 0 0 6px color-mix(in oklab, var(--tint), transparent 88%);
+  background: color-mix(in oklab, var(--fill), var(--tint) 4%);
+}
+
+/* Cards (glass) */
+.ios-card {
+  background: var(--surface);
+  backdrop-filter: saturate(180%) blur(var(--blur));
+  -webkit-backdrop-filter: saturate(180%) blur(var(--blur));
+  border-radius: var(--radius-lg);
+  border: 1px solid color-mix(in oklab, var(--separator), transparent 70%);
+  box-shadow: var(--shadow);
+  padding: 16px;
+}
+
+/* Grouped list */
+.ios-group {
+  margin: 12px 0; padding: 6px; border-radius: 16px;
+  background: var(--surface);
+  backdrop-filter: saturate(180%) blur(var(--blur));
+  -webkit-backdrop-filter: saturate(180%) blur(var(--blur));
+  box-shadow: var(--shadow);
+}
+.ios-cell { display: flex; align-items: center; gap: 12px; min-height: 48px; padding: 10px 12px; border-radius: 12px; color: var(--label); }
+.ios-cell + .ios-cell { border-top: 0.5px solid var(--separator); }
+.ios-cell .detail { color: var(--secondary); margin-left: auto; }
+
+/* Segmented */
+.ios-segmented { position: relative; display: inline-flex; background: var(--fill); border-radius: 12px; padding: 4px; }
+.ios-segmented button {
+  appearance: none; background: transparent; border: 0; color: var(--secondary);
+  padding: 6px 12px; border-radius: 10px; font-weight: 600; cursor: pointer; z-index: 1;
+}
+.ios-segmented .indicator {
+  position: absolute; top: 4px; left: 4px; height: calc(100% - 8px);
+  border-radius: 10px; background: var(--popover); box-shadow: var(--shadow);
+  transition: transform .18s cubic-bezier(.2,.7,.2,1), width .18s cubic-bezier(.2,.7,.2,1); z-index: 0;
+}
+.ios-segmented .active { color: var(--label); }
+
+/* Switch */
+input[type=checkbox].ios-switch {
+  appearance: none; width: 51px; height: 31px; border-radius: 999px;
+  background: color-mix(in oklab, var(--label), transparent 88%);
+  position: relative; outline: none; border: none; cursor: pointer; transition: background .2s ease;
+}
+input[type=checkbox].ios-switch::after {
+  content: ""; position: absolute; top: 2px; left: 2px; width: 27px; height: 27px; border-radius: 50%;
+  background: white; box-shadow: 0 2px 5px rgba(0,0,0,.15); transition: transform .2s ease;
+}
+input[type=checkbox].ios-switch:checked { background: var(--tint); }
+input[type=checkbox].ios-switch:checked::after { transform: translateX(20px); }
+
+/* Tab bar (optional) */
+.ios-tabbar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
+  padding-bottom: max(env(safe-area-inset-bottom), 8px);
+  backdrop-filter: saturate(180%) blur(var(--blur));
+  -webkit-backdrop-filter: saturate(180%) blur(var(--blur));
+  background: var(--surface);
+  border-top: 0.5px solid var(--separator);
+}
+.ios-tabbar .tabs { display: grid; grid-auto-flow: column; justify-content: space-around; align-items: center; height: 58px; }
+.ios-tabbar .tab {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  color: var(--secondary); font-size: 12px; text-decoration: none; padding: 6px 8px;
+}
+.ios-tabbar .tab.active { color: var(--tint); }
 /* Glass utility using your exact spec */
 .glass {
   background: rgba(188, 170, 170, 0.32);
