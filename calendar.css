@@ -1,51 +1,42 @@
-body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    margin: 0;
-    padding: 20px;
-    background-color: #000000;
-}
-
+/* Calendar page tweaks using iOS theme tokens */
+.calendar-wrapper { padding-bottom: 60px; }
 h1 {
-    margin-bottom: 40px;
-    color: #ffffff;
-    text-align: center;
+  margin: 12px 16px;
+  color: var(--label);
+  text-align: left;
+  font-weight: 800;
+  letter-spacing: -.02em;
 }
-
 .calendar-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 60px;
-    color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 12px 16px 24px;
+  color: var(--label);
 }
-
 .calendar-container iframe {
-    width: 100%;
-    max-width: 800px;
-    height: 600px;
-    border: none;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    flex-direction: column;
+  width: 100%;
+  max-width: 980px;
+  height: 640px;
+  border: none;
+  border-radius: 16px;
+  background: var(--surface);
+  backdrop-filter: saturate(180%) blur(var(--blur));
+  -webkit-backdrop-filter: saturate(180%) blur(var(--blur));
+  box-shadow: var(--shadow);
 }
-
 .button-container {
-    display: inline-block;
-    padding: 12px 24px;
-    margin-top: 0px;
-    margin-bottom: 0px;
-    color: #ffffff;
-    background-color: #4285F4;
-    text-decoration: none;
-    font-weight: 600;
-    border-radius: 8px;
-    transition: background-color 0.3s ease;
-    cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 16px;
+  margin: 0 16px 16px;
+  color: #fff;
+  background-color: var(--tint);
+  text-decoration: none;
+  font-weight: 700;
+  border-radius: 14px;
+  transition: background-color .2s ease, transform .08s ease;
+  cursor: pointer;
 }
-
-.button-container:hover {
-    background-color: #3578ea;
-}
-.button-container:active {
-    background-color: #2a5cb8;
-}
+.button-container:hover { background-color: var(--tint-pressed); }
+.button-container:active { transform: translateY(1px); }
