@@ -1,53 +1,40 @@
-let workDuration = 25 * 60;
-let breakDuration = 5 * 60;
-let time = workDuration;
-let timerInterval = null;
-let running = false;
-let isWorkSession = true;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GEAR HUB — Productivity Tools</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <link rel="stylesheet" href="ios-theme.css">
+  <link rel="stylesheet" href="gear-hub.css">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="ios-ui.js"></script>
+</head>
+<body>
+  <header class="ios-nav">
+    <div class="bar">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <span class="brand-title">GEAR HUB</span>
+      </div>
+    </div>
+    <div class="ios-large-title">Productivity Tools</div>
+  </header>
 
-function updateDisplay() {
-  const minutes = Math.floor(time / 60);
-  const seconds = time % 60;
-  document.getElementById("timer").innerText = `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
-}
-document.getElementById("setTimeBtn").onclick = () => {
-  const work = parseInt(document.getElementById("workTime").value);
-  const brk = parseInt(document.getElementById("breakTime").value);
-  if (work > 0 && brk > 0) {
-    workDuration = work * 60;
-    breakDuration = brk * 60;
-    time = workDuration;
-    isWorkSession = true;
-    updateDisplay();
-  } else {
-    alert("Enter valid numbers!");
-  }
-};
-document.getElementById("startBtn").onclick = () => {
-  if (!running) {
-    running = true;
-    timerInterval = setInterval(() => {
-      time--;
-      updateDisplay();
-      if (time <= 0) {
-        clearInterval(timerInterval);
-        if (isWorkSession) {
-          alert("Work session complete! Break time!");
-          time = breakDuration;
-        } else {
-          alert("Break finished! Back to work!");
-          time = workDuration;
-        }
-        isWorkSession = !isWorkSession;
-        updateDisplay();
-        running = false;
-      }
-    }, 1000);
-  }
-};
-document.getElementById("pauseBtn").onclick = () => { running = false; clearInterval(timerInterval); };
-document.getElementById("resetBtn").onclick = () => {
-  running = false; clearInterval(timerInterval);
-  time = workDuration; isWorkSession = true; updateDisplay();
-};
-updateDisplay();
+  <main class="container">
+    <section class="grid grid-3">
+      <a href="pomodoro.html" class="card link-card ios-card">
+        <h3>Pomodoro Timer</h3>
+        <p>Stay focused with interval-based study sessions.</p>
+      </a>
+      <a href="fileorganizer.html" class="card link-card ios-card">
+        <h3>File Organizer</h3>
+        <p>Upload, categorize and manage your study materials.</p>
+      </a>
+      <a href="flashcards.html" class="card link-card ios-card">
+        <h3>Flashcards</h3>
+        <p>Study smarter with custom flashcards.</p>
+      </a>
+    </section>
+  </main>
+</body>
+</html>
