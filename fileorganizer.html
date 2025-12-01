@@ -2,36 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>EduKit — File Explorer (Windows style)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>GEAR HUB — Files</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1, viewport-fit=cover" />
+  <link rel="stylesheet" href="ios-theme.css" />
+  <link rel="stylesheet" href="gear-hub.css" />
   <link rel="stylesheet" href="fileorganizer.css" />
+  <script defer src="ios-ui.js"></script>
   <script defer src="fileorganizer.js"></script>
 </head>
 <body>
-  <header class="topbar">
-    <div class="nav-left">
-      <button id="backBtn" class="nav-btn" title="Back">◀</button>
-      <button id="forwardBtn" class="nav-btn" title="Forward">▶</button>
-      <button id="upBtn" class="nav-btn" title="Up">⬆</button>
-      <button id="refreshBtn" class="nav-btn" title="Refresh">⟳</button>
+  <header class="ios-nav">
+    <div class="bar">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <span class="brand-title">GEAR HUB</span>
+      </div>
     </div>
-
-    <div class="brand">EduKit • Files</div>
-
-    <div class="tools">
-      <input id="search" placeholder="Search files or tags..." aria-label="Search" />
-      <select id="sort">
-        <option value="date">Sort: Recent</option>
-        <option value="name">Name</option>
-        <option value="size">Size</option>
-        <option value="type">Type</option>
-      </select>
-
-      <button id="newFolder" class="btn">New Folder</button>
-      <label class="btn upload-btn">Upload
-        <input id="fileInput" type="file" multiple hidden>
-      </label>
-      <button id="clearAll" class="btn danger" title="Clear stored state">Clear All</button>
+    <div class="ios-large-title">Files</div>
+    <div class="ios-search">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <input id="search" type="search" placeholder="Search files or tags..." aria-label="Search" />
     </div>
   </header>
 
@@ -58,7 +51,6 @@
     <section class="content" aria-live="polite">
       <div class="toolbar">
         <div id="breadcrumb" class="breadcrumb"></div>
-
         <div class="view-controls">
           <button id="gridView" class="view-btn active" title="Grid">Grid</button>
           <button id="listView" class="view-btn" title="List">List</button>
@@ -69,16 +61,38 @@
 
       <div class="actions">
         <div class="left-actions">
-          <button id="selectAll" class="ghost">Select All</button>
-          <button id="deselectAll" class="ghost">Deselect</button>
-          <button id="deleteSelected" class="danger">Delete Selected</button>
-          <button id="undo" class="ghost">Undo</button>
+          <button id="newFolder" class="ghost">New Folder</button>
+          <label class="ghost">Upload
+            <input id="fileInput" type="file" multiple hidden>
+          </label>
         </div>
 
         <div class="right-actions">
+          <select id="sort">
+            <option value="date">Sort: Recent</option>
+            <option value="name">Name</option>
+            <option value="size">Size</option>
+            <option value="type">Type</option>
+          </select>
           <select id="moveTo"></select>
-          <button id="moveSelected" class="btn">Move</button>
-          <button id="exportSelected" class="btn">Export JSON</button>
+          <button id="moveSelected">Move</button>
+          <button id="exportSelected">Export JSON</button>
+          <button id="clearAll" class="ghost">Clear State</button>
+        </div>
+      </div>
+
+      <div class="actions">
+        <div class="left-actions">
+          <button id="selectAll" class="ghost">Select All</button>
+          <button id="deselectAll" class="ghost">Deselect</button>
+          <button id="deleteSelected" style="background:#ff3b30;color:#fff;border:none;border-radius:12px;">Delete Selected</button>
+          <button id="undo" class="ghost">Undo</button>
+        </div>
+        <div class="right-actions">
+          <button id="refreshBtn" class="ghost">Refresh</button>
+          <button id="upBtn" class="ghost" title="Up">Up</button>
+          <button id="backBtn" class="ghost" title="Back">Back</button>
+          <button id="forwardBtn" class="ghost" title="Forward">Forward</button>
         </div>
       </div>
 
@@ -94,7 +108,7 @@
       <header class="modal-header">
         <div id="previewName" class="preview-name">Preview</div>
         <div class="modal-controls">
-          <button id="downloadBtn" class="btn">Download</button>
+          <button id="downloadBtn">Download</button>
           <button id="renameBtn" class="ghost">Rename</button>
           <button id="tagBtn" class="ghost">Add Tag</button>
           <button id="closePreview" class="icon-btn" aria-label="Close">✕</button>
@@ -113,13 +127,14 @@
       </header>
       <div class="modal-body">
         <input id="smallInput" type="text" />
-        <div class="modal-actions">
-          <button id="smallSave" class="btn">Save</button>
+        <div class="modal-actions" style="margin-top:12px; display:flex; gap:8px; justify-content:flex-end;">
+          <button id="smallSave">Save</button>
           <button id="smallCancel" class="ghost">Cancel</button>
         </div>
       </div>
     </div>
   </div>
-  <a href="productivitytools.html" class = "back-wa">Return</a>
+
+  <a href="productivitytools.html" class="back-wa">Return</a>
 </body>
 </html>
