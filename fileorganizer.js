@@ -1,3 +1,4 @@
+/* unchanged logic; branding tweaks in UI text only */
 const DB_NAME = "edukit_files_db_v1";
 const DB_STORE = "files";
 let dbPromise = null;
@@ -62,7 +63,7 @@ let meta = (()=>{
         {id:"fld_docs", name:"Documents", parent:"fld_root"},
         {id:"fld_imgs", name:"Pictures", parent:"fld_root"}
       ],
-      files: [] // metadata: {id,name,origName,type,size,blobKey,folderId,tags:[],createdAt}
+      files: []
     };
     saveMeta(init);
     return init;
@@ -75,8 +76,8 @@ const $ = id => document.getElementById(id);
 const folderListEl = $("folderList");
 const tagListEl = $("tagList");
 const fileGridEl = $("fileGrid");
-const fileInput = $("fileInput");
-const dropzone = $("dropzone");
+const fileInput = document.getElementById("fileInput");
+const dropzone = document.getElementById("dropzone");
 const breadcrumbEl = $("breadcrumb");
 const moveToEl = $("moveTo");
 const previewModal = $("previewModal");
@@ -91,31 +92,31 @@ const smallTitle = $("smallTitle");
 const smallInput = $("smallInput");
 const smallSave = $("smallSave");
 const smallClose = $("smallClose");
-const searchInput = $("search");
-const sortSelect = $("sort");
-const backBtn = $("backBtn");
-const forwardBtn = $("forwardBtn");
-const upBtn = $("upBtn");
-const refreshBtn = $("refreshBtn");
-const newFolderBtn = $("newFolder");
-const selectAllBtn = $("selectAll");
-const deselectAllBtn = $("deselectAll");
-const deleteSelectedBtn = $("deleteSelected");
-const undoBtn = $("undo");
-const moveSelectedBtn = $("moveSelected");
-const exportSelectedBtn = $("exportSelected");
-const gridViewBtn = $("gridView");
-const listViewBtn = $("listView");
-const clearAllBtn = $("clearAll");
+const searchInput = document.getElementById("search");
+const sortSelect = document.getElementById("sort");
+const backBtn = document.getElementById("backBtn");
+const forwardBtn = document.getElementById("forwardBtn");
+const upBtn = document.getElementById("upBtn");
+const refreshBtn = document.getElementById("refreshBtn");
+const newFolderBtn = document.getElementById("newFolder");
+const selectAllBtn = document.getElementById("selectAll");
+const deselectAllBtn = document.getElementById("deselectAll");
+const deleteSelectedBtn = document.getElementById("deleteSelected");
+const undoBtn = document.getElementById("undo");
+const moveSelectedBtn = document.getElementById("moveSelected");
+const exportSelectedBtn = document.getElementById("exportSelected");
+const gridViewBtn = document.getElementById("gridView");
+const listViewBtn = document.getElementById("listView");
+const clearAllBtn = document.getElementById("clearAll");
 
 /* ---------------------- runtime state ---------------------- */
 let activeFolderId = "fld_root";
 let selected = new Set();
 let tagFilter = null;
-let viewMode = "grid"; // grid | list
+let viewMode = "grid";
 let backStack = [];
 let forwardStack = [];
-let undoStack = []; // for deletes
+let undoStack = [];
 let previewFile = null;
 
 /* ---------------------- helpers ---------------------- */
@@ -148,7 +149,6 @@ function renderFolders(){
     btn.dataset.id = f.id;
     btn.innerHTML = `<span>${escapeHtml(f.name)}</span><small style="color:var(--muted)">${countFilesInFolder(f.id)}</small>`;
     btn.onclick = ()=> navigateToFolder(f.id);
-    // allow drop on folder to move files
     btn.addEventListener("dragover", e => e.preventDefault());
     btn.addEventListener("drop", (e)=> {
       e.preventDefault();
@@ -164,13 +164,11 @@ function renderFolders(){
 function countFilesInFolder(fid){
   return meta.files.filter(x=>x.folderId===fid).length;
 }
-
 function gatherTags(){
   const s = new Set();
   meta.files.forEach(f=> (f.tags||[]).forEach(t=> s.add(t)));
   return Array.from(s);
 }
-
 function renderTags(){
   tagListEl.innerHTML = "";
   gatherTags().forEach(t=>{
@@ -182,7 +180,6 @@ function renderTags(){
     tagListEl.appendChild(b);
   });
 }
-
 function renderMoveTo(){
   moveToEl.innerHTML = "";
   const def = document.createElement("option"); def.value=""; def.textContent="Select folder"; moveToEl.appendChild(def);
@@ -190,30 +187,24 @@ function renderMoveTo(){
     const o = document.createElement("option"); o.value = f.id; o.textContent = f.name; moveToEl.appendChild(o);
   });
 }
-
 function renderBreadcrumb(){
   const parts = [];
   let cur = meta.folders.find(x=>x.id===activeFolderId);
   if (!cur) { breadcrumbEl.textContent = "Home"; return; }
-  // simple breadcrumb (we don't have deep nested tree in this model, but use parent if exists)
   parts.push(cur);
   if (cur.parent){
     const p = meta.folders.find(x=>x.id===cur.parent);
     if (p) parts.unshift(p);
   }
-  breadcrumbEl.innerHTML = parts.map(p=>`<button class="crumb" data-id="${p.id}">${escapeHtml(p.name)}</button>`).join(" <span style='opacity:.5'>/</span> ");
-  // wire crumb clicks
+  breadcrumbEl.innerHTML = parts.map(p=>`<button class="crumb ghost" data-id="${p.id}">${escapeHtml(p.name)}</button>`).join(" <span style='opacity:.5'>/</span> ");
   breadcrumbEl.querySelectorAll(".crumb").forEach(btn=> btn.addEventListener("click", ()=> navigateToFolder(btn.dataset.id)));
 }
-
 function renderFiles(){
   fileGridEl.innerHTML = "";
-  const q = (searchInput.value||"").toLowerCase();
+  const q = (searchInput?.value||"").toLowerCase();
   let results = meta.files.slice();
 
-  // folder filters
   if (activeFolderId === "__all") {
-    // include everything excluding trash
     const trashId = meta.folders.find(f=>f.name==="Trash")?.id;
     if (trashId) results = results.filter(f=> f.folderId !== trashId);
   } else if (activeFolderId === "__recent") {
@@ -224,14 +215,9 @@ function renderFiles(){
   } else {
     results = results.filter(f => f.folderId === activeFolderId);
   }
-
-  // tag filter
   if (tagFilter) results = results.filter(f => (f.tags||[]).includes(tagFilter));
-
-  // search filter
   if (q) results = results.filter(f=> f.name.toLowerCase().includes(q) || (f.origName||"").toLowerCase().includes(q) || (f.tags||[]).some(t=> t.toLowerCase().includes(q)));
 
-  // sort
   const sort = sortSelect.value || "date";
   results.sort((a,b)=>{
     if (sort==="name") return a.name.localeCompare(b.name);
@@ -240,15 +226,11 @@ function renderFiles(){
     return new Date(b.createdAt) - new Date(a.createdAt);
   });
 
-  // show grid or list depending on viewMode
   results.forEach(f => {
     const card = document.createElement("div"); card.className = "file-card"; card.tabIndex = 0; card.dataset.id = f.id;
-    // thumbnail
     const thumb = document.createElement("div"); thumb.className = "file-thumb";
     if ((f.type||"").startsWith("image/")){
-      // show image preview from idb
       const img = document.createElement("img"); img.alt = f.name;
-      // async fill src
       idbGet(f.blobKey).then(blob => { if (blob) img.src = URL.createObjectURL(blob); }).catch(()=>{});
       thumb.appendChild(img);
     } else {
@@ -272,12 +254,10 @@ function renderFiles(){
 
     card.appendChild(thumb); card.appendChild(metaEl); card.appendChild(actions);
 
-    // draggable
     card.draggable = true;
     card.addEventListener("dragstart", ev=> { ev.dataTransfer.setData("text/plain", f.id); card.classList.add("dragging"); });
     card.addEventListener("dragend", ()=> card.classList.remove("dragging"));
 
-    // click to open
     card.addEventListener("click", ()=> openPreview(f.id));
     card.addEventListener("keydown", (e)=> { if (e.key === "Enter") openPreview(f.id); });
 
@@ -313,7 +293,6 @@ function goUp(){
   const cur = meta.folders.find(f=>f.id===activeFolderId);
   if (!cur) return;
   if (cur.parent){ navigateToFolder(cur.parent); return; }
-  // if no parent and not root, go to root
   if (activeFolderId !== "fld_root") navigateToFolder("fld_root");
 }
 function updateNavButtons(){
@@ -365,9 +344,7 @@ function doUndo(){
   if (!undoStack.length) return alert("Nothing to undo");
   const it = undoStack.pop();
   if (it.type==="delete"){
-    // restore by pushing back the deleted metadata (but blob remains in idb)
     it.files.forEach(fi => {
-      // only push if not already present
       if (!meta.files.find(x=>x.id===fi.id)) meta.files.push(fi);
     });
     saveMeta(meta); renderAll();
@@ -375,23 +352,25 @@ function doUndo(){
 }
 
 /* ---------------------- upload & idb store ---------------------- */
-fileInput.addEventListener("change", e => {
-  if (!e.target.files) return;
-  handleUpload(e.target.files);
-  e.target.value = "";
-});
-dropzone.addEventListener("dragover", e => { e.preventDefault(); dropzone.classList.add("dragover"); });
-dropzone.addEventListener("dragleave", ()=> dropzone.classList.remove("dragover"));
-dropzone.addEventListener("drop", e => { e.preventDefault(); dropzone.classList.remove("dragover"); if (e.dataTransfer.files) handleUpload(e.dataTransfer.files); });
+if (fileInput) {
+  fileInput.addEventListener("change", e => {
+    if (!e.target.files) return;
+    handleUpload(e.target.files);
+    e.target.value = "";
+  });
+}
+if (dropzone) {
+  dropzone.addEventListener("dragover", e => { e.preventDefault(); dropzone.classList.add("dragover"); });
+  dropzone.addEventListener("dragleave", ()=> dropzone.classList.remove("dragover"));
+  dropzone.addEventListener("drop", e => { e.preventDefault(); dropzone.classList.remove("dragover"); if (e.dataTransfer.files) handleUpload(e.dataTransfer.files); });
+}
 
 async function handleUpload(fileList){
   const arr = Array.from(fileList);
   for (const f of arr){
     const id = "f_"+uid(10);
     const blobKey = "blob_"+id;
-    // save blob to idb
     await idbPut(blobKey, f);
-    // metadata
     meta.files.unshift({
       id,
       name: f.name,
@@ -423,14 +402,13 @@ async function openPreview(fileId){
     const iframe = document.createElement("iframe"); iframe.src = URL.createObjectURL(blob); previewBody.appendChild(iframe);
   } else if ((entry.type||"").startsWith("text/") || entry.type==="application/json"){
     const text = await blob.text();
-    const pre = document.createElement("pre"); pre.style.whiteSpace="pre-wrap"; pre.style.color="#dbe9ff"; pre.textContent = text;
+    const pre = document.createElement("pre"); pre.style.whiteSpace="pre-wrap"; pre.style.color="var(--label)"; pre.textContent = text;
     previewBody.appendChild(pre);
   } else {
     const p = document.createElement("div"); p.textContent = `${entry.origName || entry.name} — preview not available.`; p.style.color = "var(--muted)";
     previewBody.appendChild(p);
   }
 
-  // download handler
   downloadBtn.onclick = async ()=> {
     const b = await idbGet(entry.blobKey);
     if (!b) return alert("Missing blob");
@@ -438,7 +416,6 @@ async function openPreview(fileId){
     const a = document.createElement("a"); a.href = url; a.download = entry.name; a.click(); URL.revokeObjectURL(url);
   };
 
-  // rename/tag handlers
   renameBtn.onclick = ()=> promptRename(entry.id);
   tagBtn.onclick = ()=> promptTag(entry.id);
 
@@ -472,7 +449,7 @@ function promptTag(id){
   };
 }
 smallClose.onclick = ()=> smallModal.classList.add("hidden");
-$("smallCancel").onclick = ()=> smallModal.classList.add("hidden");
+document.getElementById("smallCancel").onclick = ()=> smallModal.classList.add("hidden");
 
 /* ---------------------- small utils ---------------------- */
 function guessType(name){
@@ -495,11 +472,11 @@ function fileIconForType(type){
 }
 function escapeHtml(s){ return (s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
-$("gridView").onclick = ()=> { viewMode="grid"; renderFiles(); updateViewButtons(); };
-$("listView").onclick = ()=> { viewMode="list"; renderFiles(); updateViewButtons(); };
-$("search").addEventListener("input", debounce(()=> renderFiles(), 200));
-$("sort").addEventListener("change", ()=> renderFiles());
-backBtn.onclick = goBack; forwardBtn.onclick = goForward; upBtn.onclick = goUp; refreshBtn.onclick = ()=> renderAll();
+document.getElementById("gridView").onclick = ()=> { viewMode="grid"; renderFiles(); updateViewButtons(); };
+document.getElementById("listView").onclick = ()=> { viewMode="list"; renderFiles(); updateViewButtons(); };
+if (document.getElementById("search")) document.getElementById("search").addEventListener("input", debounce(()=> renderFiles(), 200));
+document.getElementById("sort").addEventListener("change", ()=> renderFiles());
+document.getElementById("backBtn").onclick = goBack; document.getElementById("forwardBtn").onclick = goForward; document.getElementById("upBtn").onclick = goUp; document.getElementById("refreshBtn").onclick = ()=> renderAll();
 
 newFolderBtn.onclick = ()=> {
   const name = prompt("Folder name:", "New Folder"); if (!name) return;
@@ -515,9 +492,7 @@ moveSelectedBtn.onclick = () => { moveSelectedTo(moveToEl.value); };
 exportSelectedBtn.onclick = () => exportSelected();
 clearAllBtn.onclick = () => {
   if (!confirm("Clear stored state (metadata and blobs) ?")) return;
-
   localStorage.removeItem(STORAGE_KEY);
-
   const req = indexedDB.deleteDatabase(DB_NAME);
   req.onsuccess = ()=> location.reload();
   req.onerror = ()=> alert("Failed to clear DB");
@@ -533,7 +508,6 @@ function selectAllVisible(){ document.querySelectorAll('.file-card').forEach(c =
 function toggleSelect(id, on){ if (on) selected.add(id); else selected.delete(id); }
 
 function navigateToSpecialView(view){
-
   backStack.push(activeFolderId);
   activeFolderId = view;
   selected.clear(); renderAll();
@@ -552,3 +526,4 @@ function updateViewButtons(){ if (viewMode==="grid"){ gridViewBtn.classList.add(
 init();
 
 function debounce(fn, wait=200){ let t; return (...a)=>{ clearTimeout(t); t=setTimeout(()=>fn(...a), wait); }; }
+
