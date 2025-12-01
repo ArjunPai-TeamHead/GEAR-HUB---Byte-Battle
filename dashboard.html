@@ -1,57 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>GEAR HUB Dashboard</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8">
+  <title>GEAR HUB — Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <link rel="stylesheet" href="ios-theme.css">
+  <link rel="stylesheet" href="gear-hub.css">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="ios-ui.js"></script>
 </head>
 <body>
-
-    <!-- NAVBAR -->
-    <nav class="navbar">
-        <div class="nav-left">
-            <a href="dashboard.html" class="logo">EduKit</a>
-            <a href="dashboard.html">Home</a>
-            <a href="calendar.html">Calendar</a>
-            <a href="productivitytools.html">Productivity Tools</a>
-            <a href="task-checklist.html">Task Checklist</a>
-        </div>
-
-        <div class="nav-right">
-            <a href="login.html" class="logout-btn">Logout</a>
-        </div>
-    </nav>
-
-
-  <div class="dashboard-content">
-    <h2>Welcome to EduKit Dashboard</h2>
-
-    <div class="card-container">
-
-        <a href="profile.html" class="card link-card">
-            <h3>Profile</h3>
-            <p>View and update your personal details.</p>
-        </a>
-
-        <a href="calendar.html" class="card link-card">
-            <h3>Calendar</h3>
-            <p>Track your events and upcoming tasks.</p>
-        </a>
-
-        <a href="productivitytools.html" class="card link-card">
-            <h3>Productivity Tools</h3>
-            <p>Boost your workflow with smart tools.</p>
-        </a>
-
-        <a href = "task-checklist.html" class = "card link-card">
-            <h3>Checklist</h3>
-            <p>Track Your Daily Goals and Tasks</p>
-        </a>
-
+  <header class="ios-nav">
+    <div class="bar">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <span class="brand-title">GEAR HUB</span>
+      </div>
     </div>
-  </div>
+    <div class="ios-large-title">Dashboard</div>
+  </header>
 
-
+  <main class="container">
+    <section class="grid grid-3">
+      <a href="profile.html" class="card link-card ios-card">
+        <h3>Profile</h3>
+        <p>View and update your personal details.</p>
+      </a>
+      <a href="calendar.html" class="card link-card ios-card">
+        <h3>Calendar</h3>
+        <p>Track your events and upcoming tasks.</p>
+      </a>
+      <a href="productivitytools.html" class="card link-card ios-card">
+        <h3>Productivity Tools</h3>
+        <p>Boost your workflow with smart tools.</p>
+      </a>
+      <a href="task-checklist.html" class="card link-card ios-card">
+        <h3>Checklist</h3>
+        <p>Track your daily goals and tasks.</p>
+      </a>
+    </section>
+  </main>
 </body>
 </html>
-
