@@ -1,23 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Flashcards</title>
-    <link rel="stylesheet" href="flashcards.css">
-    <script defer src="flashcards.js"></script>
+  <meta charset="UTF-8">
+  <title>GEAR HUB — Flashcards</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <link rel="stylesheet" href="ios-theme.css">
+  <link rel="stylesheet" href="gear-hub.css">
+  <link rel="stylesheet" href="flashcards.css">
+  <script defer src="ios-ui.js"></script>
+  <script defer src="flashcards.js"></script>
 </head>
 <body>
+  <header class="ios-nav">
+    <div class="bar">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <span class="brand-title">GEAR HUB</span>
+      </div>
+    </div>
+    <div class="ios-large-title">Flashcards</div>
+  </header>
 
+  <main class="container">
     <h1 class="fc-title">Flashcards</h1>
 
-    <div class="fc-input-row">
+    <div class="ios-card">
+      <div class="fc-input-row">
         <input type="text" id="frontInput" placeholder="Front (Question)">
         <input type="text" id="backInput" placeholder="Back (Answer)">
         <button id="addCardBtn">Add Card</button>
+      </div>
     </div>
 
     <div class="flashcard-grid" id="flashcardGrid"></div>
-    <a href="productivitytools.html" class = "back-way">Back to Tools</a>
-
+    <a href="productivitytools.html" class="back-way">Back to Tools</a>
+  </main>
 </body>
 </html>
