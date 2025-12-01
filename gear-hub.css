@@ -1,0 +1,29 @@
+/* GEAR HUB brand accents and helpers */
+:root {
+  --tint: #0a84ff;
+}
+
+.brand-title {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: linear-gradient(90deg, var(--tint), color-mix(in oklab, var(--tint), #7af 40%));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Utility layout */
+.pad { padding: 16px; }
+.row { display: flex; gap: 12px; align-items: center; }
+.grid { display: grid; gap: 12px; }
+.grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 900px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+
+/* Cards that auto-upgrade old .card classes */
+.card { composes: ios-card; background: var(--surface); border-radius: var(--radius-lg); border: 1px solid color-mix(in oklab, var(--separator), transparent 70%); box-shadow: var(--shadow); }
+.card h3 { margin: 0 0 .4rem 0; }
+.card p { margin: 0; }
+
+/* Legacy navbar hider (we now use .ios-nav) */
+.navbar { display: none !important; }
