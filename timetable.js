@@ -1,40 +1,70 @@
-const LS_TIMETABLE = "gearhub_timetable_v2";
-let timetable = JSON.parse(localStorage.getItem(LS_TIMETABLE) || "{}");
-const days = ["Monday","Tuesday","Wednesday","Thursday","Friday"];
-days.forEach(d=> timetable[d]=timetable[d]||[]);
-const $ = id=>document.getElementById(id);
-function save(){ localStorage.setItem(LS_TIMETABLE, JSON.stringify(timetable)); }
-function uid(n=6){ return Math.random().toString(36).slice(2,2+n); }
-document.addEventListener("DOMContentLoaded", ()=>{
-  const daySelect = $("daySelect");
-  if (!daySelect) return;
-  days.forEach(d=> daySelect.innerHTML += `<option>${d}</option>`);
-  $("addSlotBtn").addEventListener("click", ()=>{
-    const day = daySelect.value, subject = $("subjectInput").value.trim(), time = $("timeInput").value.trim(), room = $("roomInput").value.trim();
-    if(!subject||!time) return alert("Subject and time required");
-    timetable[day].push({ id: uid(6), subject, time, room }); save(); render();
-    $("subjectInput").value=""; $("timeInput").value=""; $("roomInput").value="";
-  });
-  render();
-});
-function render(){
-  const week = $("weekGrid"); const tlist = $("todayList"); if (!week||!tlist) return;
-  week.innerHTML = "";
-  days.forEach(d=>{
-    const col = document.createElement("div"); col.className="day-col";
-    col.innerHTML = `<div style="font-weight:700;margin-bottom:8px">${d}</div>`;
-    (timetable[d]||[]).forEach(s=>{
-      const slot = document.createElement("div"); slot.className="slot";
-      slot.innerHTML = `<strong>${s.subject}</strong><div class="secondary">${s.time}${s.room? " • "+s.room : ""}</div>
-      <div style="text-align:right;margin-top:6px"><button class="ghost" onclick="deleteSlot('${d}','${s.id}')">Delete</button></div>`;
-      col.appendChild(slot);
-    });
-    week.appendChild(col);
-  });
-  const todayName = days[new Date().getDay()-1] || "Monday";
-  tlist.innerHTML="";
-  (timetable[todayName]||[]).forEach(s=>{
-    tlist.innerHTML += `<li><strong>${s.subject}</strong><div class="secondary">${s.time}${s.room? " • "+s.room:""}</div></li>`;
-  });
-}
-window.deleteSlot = (day,id)=>{ timetable[day] = timetable[day].filter(x=>x.id!==id); save(); render(); }
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>GEAR HUB — Timetable</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="ui-theme.css">
+  <script defer src="timetable.js"></script>
+  <script defer src="nav.js"></script>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand-row">
+        <div class="brand-logo">⚙️</div>
+        <div>
+          <div class="brand-name">GEAR HUB</div>
+          <div class="brand-sub">Learn. Collaborate. Excel.</div>
+        </div>
+      </div>
+      <nav class="nav">
+        <a href="dashboard.html"><span class="icon">🏠</span> Dashboard</a>
+        <a href="timetable.html" class="active"><span class="icon">📆</span> Timetable</a>
+        <a href="events.html"><span class="icon">📅</span> Events</a>
+        <a href="notes.html"><span class="icon">📝</span> Notes</a>
+        <a href="task-checklist.html"><span class="icon">✅</span> Tasks</a>
+      </nav>
+      <div class="sidebar-user">
+        <div class="user-card">
+          <img class="user-avatar" id="navAvatar" src="assets/pfp.png" alt="Avatar">
+          <div class="user-meta">
+            <div class="user-name" id="navName">Arjun</div>
+            <div class="user-role">Student</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <div class="page-title">Timetable</div>
+        <div class="top-right">
+          <a class="button" href="dashboard.html">Back</a>
+        </div>
+      </div>
+
+      <section class="card">
+        <div class="row" style="flex-wrap:wrap">
+          <select id="daySelect" aria-label="Day"></select>
+          <input id="subjectInput" placeholder="Subject">
+          <input id="timeInput" placeholder="10:00-10:45">
+          <input id="roomInput" placeholder="Room">
+          <button id="addSlotBtn">Add Slot</button>
+        </div>
+      </section>
+
+      <section class="panels" style="grid-template-columns: 2fr 1fr;">
+        <div class="card">
+          <div class="panel-title">Week View</div>
+          <div id="weekGrid" class="list"></div>
+        </div>
+        <div class="card">
+          <div class="panel-title">Today</div>
+          <ul id="todayList" class="list"></ul>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
