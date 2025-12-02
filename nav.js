@@ -1,14 +1,13 @@
-/* Populate header avatar + username across pages */
+/* Sidebar user inject (avatar + name) */
 (function(){
-  const nameEl = document.getElementById("navName");
-  const avatarEl = document.getElementById("navAvatar");
   try{
     const user = JSON.parse(localStorage.getItem("user")||"{}");
-    if(nameEl) nameEl.textContent = user.username || "Guest";
+    const nameEl = document.getElementById("navName");
+    if (nameEl) nameEl.textContent = user.username || "Arjun";
+    const greetEl = document.getElementById("greetName");
+    if (greetEl) greetEl.textContent = user.username || "Arjun";
   }catch(e){}
-  const storedAvatar = localStorage.getItem("gearhub_avatar_v1");
-  if (avatarEl){
-    if (storedAvatar) avatarEl.src = storedAvatar;
-    else avatarEl.src = "assets/pfp.png";
-  }
+  const avatarEl = document.getElementById("navAvatar");
+  const b64 = localStorage.getItem("gearhub_avatar_v1");
+  if (avatarEl) avatarEl.src = b64 || "assets/pfp.png";
 })();
