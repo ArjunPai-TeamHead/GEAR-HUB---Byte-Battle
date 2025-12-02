@@ -2,33 +2,88 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <link rel="stylesheet" href="ios-theme.css">
-  <link rel="stylesheet" href="gear-hub.css">
-  <link rel="stylesheet" href="styles.css">
-  <script src="script.js" defer></script>
-  <title>GEAR HUB</title>
+  <title>GEAR HUB — Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="ui-theme.css">
+  <script defer src="nav.js"></script>
 </head>
 <body>
-  <header class="ios-nav">
-    <div class="bar">
-      <div class="brand">
-        <div class="logo" aria-hidden="true"></div>
-        <span class="brand-title">GEAR HUB</span>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand-row">
+        <div class="brand-logo">⚙️</div>
+        <div>
+          <div class="brand-name">GEAR HUB</div>
+          <div class="brand-sub">Learn. Collaborate. Excel.</div>
+        </div>
       </div>
-    </div>
-  </header>
 
-  <main class="container">
-    <section class="ios-card" style="text-align:center; padding:32px;">
-      <img src="assets/Edukit Logo.png" alt="GEAR HUB Logo" style="width: 120px; border-radius: 16px; margin: 8px auto 12px; display:block;">
-      <h1 style="font-weight:800; letter-spacing:-.02em; margin: 4px 0 8px;">Welcome to GEAR HUB</h1>
-      <p>Your lightweight educational toolkit for learning and development.</p>
-      <a href="signup.html" class="button"><b>Get Started</b></a>
-    </section>
-  </main>
+      <nav class="nav">
+        <a href="dashboard.html" class="active"><span class="icon">🏠</span> Dashboard</a>
+        <a href="notes.html"><span class="icon">📝</span> Notes</a>
+        <a href="timetable.html"><span class="icon">📆</span> Timetable</a>
+        <a href="events.html"><span class="icon">📅</span> Events</a>
+        <a href="pomodoro.html"><span class="icon">⏱️</span> Pomodoro</a>
+        <a href="chat.html"><span class="icon">💬</span> Chat</a>
+        <a href="profile.html"><span class="icon">👤</span> Profile</a>
+        <a href="task-checklist.html"><span class="icon">✅</span> Tasks</a>
+      </nav>
+
+      <div class="sidebar-user">
+        <div class="user-card">
+          <img class="user-avatar" id="navAvatar" src="assets/pfp.png" alt="Avatar">
+          <div class="user-meta">
+            <div class="user-name" id="navName">Arjun</div>
+            <div class="user-role">Engineering • Admin</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <div class="page-title">Welcome back, <span class="username-accent" id="greetName">Arjun</span></div>
+      </div>
+
+      <section class="stats">
+        <div class="card">
+          <div class="card-head"><span>Get Started</span></div>
+          <div class="list">
+            <a class="list-item" href="signup.html"><div class="left">Create Account</div></a>
+            <a class="list-item" href="login.html"><div class="left">Login</div></a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head"><span>Quick Links</span></div>
+          <div class="list">
+            <a class="list-item" href="notes.html"><div class="left">Upload Notes</div></a>
+            <a class="list-item" href="quiz.html"><div class="left">Practice Quiz</div></a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head"><span>Focus</span></div>
+          <div class="list">
+            <a class="list-item" href="pomodoro.html"><div class="left">Start Pomodoro</div></a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head"><span>Today</span></div>
+          <div id="todayDate" class="metric"></div>
+          <div class="sub">Check your timetable and events</div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script>
+    (function(){
+      try {
+        const u = JSON.parse(localStorage.getItem('user')||'{}');
+        document.getElementById('greetName').textContent = u.username || 'Arjun';
+        document.getElementById('navName').textContent = u.username || 'Arjun';
+      } catch(e){}
+      const d = new Date();
+      document.getElementById('todayDate').textContent = d.toLocaleDateString(undefined, { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+    })();
+  </script>
 </body>
 </html>
-
-
-
