@@ -1,43 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 <head>
   <meta charset="utf-8">
   <title>GEAR HUB — Dashboard</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width,initial-scale=1, viewport-fit=cover">
   <link rel="stylesheet" href="ios-theme.css">
   <link rel="stylesheet" href="gear-hub.css">
   <link rel="stylesheet" href="styles.css">
   <script defer src="ios-ui.js"></script>
 </head>
 <body>
-  <header class="ios-nav">
+  <header class="ios-nav glass">
     <div class="bar">
-      <div class="brand">
-        <div class="logo" aria-hidden="true"></div>
-        <span class="brand-title">GEAR HUB</span>
-      </div>
+      <div class="brand"><div class="logo"></div><span class="brand-title">GEAR HUB</span></div>
+      <nav style="display:flex;gap:10px">
+        <a href="notes.html" class="ghost">Notes</a>
+        <a href="timetable.html" class="ghost">Timetable</a>
+        <a href="events.html" class="ghost">Events</a>
+        <a href="pomodoro.html" class="ghost">Pomodoro</a>
+        <a href="chat.html" class="ghost">Chat</a>
+        <a href="profile.html" class="ghost">Profile</a>
+      </nav>
     </div>
     <div class="ios-large-title">Dashboard</div>
   </header>
 
   <main class="container">
     <section class="grid grid-3">
-      <a href="profile.html" class="card link-card ios-card">
-        <h3>Profile</h3>
-        <p>View and update your personal details.</p>
-      </a>
-      <a href="calendar.html" class="card link-card ios-card">
-        <h3>Calendar</h3>
-        <p>Track your events and upcoming tasks.</p>
-      </a>
-      <a href="productivitytools.html" class="card link-card ios-card">
-        <h3>Productivity Tools</h3>
-        <p>Boost your workflow with smart tools.</p>
-      </a>
-      <a href="task-checklist.html" class="card link-card ios-card">
-        <h3>Checklist</h3>
-        <p>Track your daily goals and tasks.</p>
-      </a>
+      <a class="ios-card glass card link-card" href="notes.html"><h3>Notes</h3><p class="secondary">Upload & share study notes</p></a>
+      <a class="ios-card glass card link-card" href="timetable.html"><h3>Timetable</h3><p class="secondary">Personal weekly schedule</p></a>
+      <a class="ios-card glass card link-card" href="events.html"><h3>Events</h3><p class="secondary">School events & deadlines</p></a>
+      <a class="ios-card glass card link-card" href="pomodoro.html"><h3>Pomodoro</h3><p class="secondary">Focus timer</p></a>
+      <a class="ios-card glass card link-card" href="chat.html"><h3>Chat</h3><p class="secondary">Classroom chat with mentions</p></a>
+      <a class="ios-card glass card link-card" href="profile.html"><h3>Profile</h3><p class="secondary">Upload avatar & iMeet</p></a>
     </section>
   </main>
 </body>

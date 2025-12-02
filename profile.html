@@ -1,31 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>  
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
   <title>GEAR HUB — Profile</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="stylesheet" href="ios-theme.css">
   <link rel="stylesheet" href="gear-hub.css">
   <link rel="stylesheet" href="profile.css">
-  <script defer src="ios-ui.js"></script>
+  <script defer src="profile.js"></script>
 </head>
 <body>
-  <header class="ios-nav">
-    <div class="bar">
-      <div class="brand">
-        <div class="logo" aria-hidden="true"></div>
-        <span class="brand-title">GEAR HUB</span>
-      </div>
-    </div>
+  <header class="ios-nav glass">
+    <div class="bar"><div class="brand"><div class="logo"></div><span class="brand-title">GEAR HUB</span></div></div>
     <div class="ios-large-title">Profile</div>
   </header>
 
-  <main class="container profile-page">
-    <div class="ios-card profile-card">
-      <img src="assets/pfp.png" alt="Profile Picture" class="profile-picture">
-      <div class="username">USERNAME</div>
-      <div class="username-sub">Tap to edit soon</div>
-    </div>
+  <main class="container">
+    <section class="ios-card glass" style="max-width:720px;margin:0 auto;text-align:center">
+      <div id="avatarWrap"><img id="avatar" class="profile-picture" src="assets/pfp.png" alt="Avatar"></div>
+      <div style="margin-top:12px">
+        <input id="avatarInput" type="file" accept="image/*">
+        <button id="uploadAvatarBtn" class="ghost">Upload</button>
+      </div>
+      <div style="margin-top:12px"><button id="imeetBtn">Start iMeet (stub)</button></div>
+    </section>
   </main>
 </body>
 </html>

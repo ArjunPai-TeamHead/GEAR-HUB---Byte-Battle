@@ -1,0 +1,4 @@
+.message{padding:10px;border-radius:12px;margin-bottom:8px;max-width:80%;box-shadow:var(--shadow);background:rgba(188,170,170,0.24);border:1px solid rgba(188,170,170,0.9)}
+.message.me{margin-left:auto;background:linear-gradient(90deg,var(--tint),#7af);color:#fff}
+.message .meta{font-size:12px;color:var(--secondary);margin-bottom:6px}
+.mention{font-weight:700;color:var(--tint)}

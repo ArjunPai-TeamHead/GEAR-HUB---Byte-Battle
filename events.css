@@ -1,0 +1,5 @@
+.events-list{display:grid;gap:12px}
+.event-card{padding:12px;border-radius:12px;background:rgba(188,170,170,0.28);border:1px solid rgba(188,170,170,1)}
+.event-meta{color:var(--secondary);font-size:13px}
+.event-actions{display:flex;justify-content:flex-end;gap:8px}
+.calendar-embed{border-radius:12px;box-shadow:var(--shadow)}

@@ -1,47 +1,16 @@
-/* GEAR HUB brand accents and helpers */
-:root {
-  --tint: #0a84ff;
+:root{
+  --brand: #0a84ff;
+  --brand-2: #7af;
 }
 
-.brand-title {
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  background: linear-gradient(90deg, var(--tint), color-mix(in oklab, var(--tint), #7af 40%));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+/* Wordmark */
+.brand-title{font-weight:900;font-size:18px;background:linear-gradient(90deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* small branded glass variant */
+.glass.brand{
+  background: rgba(10,132,255,0.12);
+  border: 1px solid rgba(10,132,255,0.28);
 }
 
-/* Utility layout */
-.pad { padding: 16px; }
-.row { display: flex; gap: 12px; align-items: center; }
-.grid { display: grid; gap: 12px; }
-.grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-@media (max-width: 900px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
-
-/* Cards that auto-upgrade old .card classes */
-.card { composes: ios-card; background: var(--surface); border-radius: var(--radius-lg); border: 1px solid color-mix(in oklab, var(--separator), transparent 70%); box-shadow: var(--shadow); }
-.card h3 { margin: 0 0 .4rem 0; }
-.card p { margin: 0; }
-
-/* Legacy navbar hider (we now use .ios-nav) */
-.navbar { display: none !important; }
-
-/* ... existing gear-hub.css content ... */
-
-/* Optional: brand-tinted glass variant */
-.glass.brand {
-  background: rgba(10, 132, 255, 0.18);
-  border: 1px solid rgba(10, 132, 255, 0.38);
-}
-
-/* Ensure legacy .card uses glass */
-.card {
-  background: rgba(188, 170, 170, 0.32);
-  border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(0,0,0,0.1);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  border: 1px solid rgba(188, 170, 170, 1);
-}
+/* ensure legacy .card uses glass look */
+.card{background:rgba(188,170,170,0.32);border-radius:16px;padding:12px;box-shadow:0 4px 30px rgba(0,0,0,0.1);border:1px solid rgba(188,170,170,1)}
