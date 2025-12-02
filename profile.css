@@ -1,2 +1,5 @@
-.profile-picture{width:140px;height:140px;border-radius:28px;object-fit:cover;border:1px solid rgba(188,170,170,0.9);box-shadow:var(--shadow)}
+.profile-picture{width:140px;height:140px;border-radius:28px;object-fit:cover;border:1px solid rgba(0,0,0,0.76);box-shadow:var(--shadow)}
 #avatarWrap{display:flex;justify-content:center}
+.meet-overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);z-index:100}
+.meet-overlay.hidden{display:none}
+.modal-card{width:min(920px,95%);padding:12px}
