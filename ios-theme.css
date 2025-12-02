@@ -1,68 +1,65 @@
-/* iOS-style glass + vibrancy design system + GLASS UTIL (user provided) */
+/* iOS-style design system + NEW glass texture + centered brand header with left profile */
+/* Tokens */
 :root{
-  --font-sans: -apple-system, "SF Pro Text", "SF Pro Display", system-ui, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-  --tint: #0a84ff;
-  --tint-pressed: #0a6fe6;
-  --label: #0b1220;
-  --secondary: rgba(60,60,67,0.6);
-  --surface: rgba(255,255,255,0.72);
-  --blur: 22px;
-  --radius-lg: 16px;
-  --shadow: 0 4px 30px rgba(0,0,0,0.1);
+  --font-sans: -apple-system,"SF Pro Text","SF Pro Display",system-ui,"Segoe UI",Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";
+  --tint:#0a84ff; --tint-pressed:#0a6fe6;
+  --label:#0b1220; --secondary:rgba(60,60,67,0.6);
+  --radius:16px; --shadow:0 4px 30px rgba(0,0,0,0.1);
+  --fill: rgba(255,255,255,0.06);
 }
-
 @media (prefers-color-scheme: dark){
-  :root{
-    --label: #fff;
-    --secondary: rgba(235,235,245,0.6);
-    --surface: rgba(28,28,30,0.64);
-    --tint: #0a84ff;
-    --tint-pressed: #0063e2;
-  }
+  :root{ --label:#fff; --secondary:rgba(235,235,245,0.6); }
 }
 
-/* Base reset */
+/* Base */
 *{box-sizing:border-box}
-html,body{height:100%;margin:0;font-family:var(--font-sans);-webkit-font-smoothing:antialiased}
-body{background:radial-gradient(1200px 600px at 10% -10%, rgba(10,132,255,.06), transparent 60%), var(--surface); color:var(--label);}
+html,body{height:100%}
+body{margin:0;font-family:var(--font-sans);color:var(--label);background:linear-gradient(180deg,rgba(0,0,0,0.1),transparent), #000}
 
-/* Reusable glass utility (exact recipe provided by you) */
-.glass, .ios-card, .ios-group, .ios-nav, .modal-card, .ios-search {
-  background: rgba(188, 170, 170, 0.32);
+/* NEW GLASS TEXTURE (applied to key components) */
+/* From https://css.glass */
+.glass,
+.ios-card,
+.ios-group,
+.modal-card,
+.ios-search,
+.ios-nav,
+.ios-tabbar {
+  background: rgba(0, 0, 0, 0.27);
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  border: 1px solid rgba(188, 170, 170, 1);
+  backdrop-filter: blur(3.4px);
+  -webkit-backdrop-filter: blur(3.4px);
+  border: 1px solid rgba(0, 0, 0, 0.76);
 }
 
-/* Header/nav */
-.ios-nav{position:sticky;top:0;z-index:60;padding:0;margin:0}
-.ios-nav .bar{display:flex;align-items:center;justify-content:space-between;height:56px;padding:8px 16px}
-.brand{display:flex;align-items:center;gap:10px;font-weight:800}
-.brand .logo{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--tint),#7af);border:1px solid rgba(255,255,255,0.08)}
-
-/* Large title */
-.ios-large-title{font-size:clamp(1.6rem,2.4vw,2.4rem);font-weight:800;padding:10px 16px 14px}
-
-/* Search */
-.ios-search{display:flex;align-items:center;gap:.5rem;height:40px;padding:0 12px;border-radius:12px;background:rgba(255,255,255,0.06)}
-.ios-search input{flex:1;border:0;background:transparent;color:inherit;outline:none}
-
-/* Cards and layout */
+/* Layout helpers */
 .container{width:min(1100px,94vw);margin:0 auto;padding:18px 0 88px}
-.ios-card{padding:16px;border-radius:16px}
 .row{display:flex;gap:12px;align-items:center}
 .grid{display:grid;gap:12px}
 .grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
 .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
 @media (max-width:900px){.grid-2,.grid-3{grid-template-columns:1fr}}
 
-/* Buttons */
-button, .btn, a.button{height:44px;padding:0 16px;border-radius:12px;border:0;background:var(--tint);color:#fff;font-weight:700;cursor:pointer}
-button.ghost, .ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--label)}
+/* Header/nav: center brand, left profile */
+.ios-nav{position:sticky;top:0;z-index:60;margin:0 0 8px 0;padding:0 0 6px 0;border-radius:16px 16px 0 0}
+.ios-nav .bar{position:relative;display:flex;align-items:center;justify-content:center;height:56px;padding:4px 16px}
+.ios-nav .nav-left{position:absolute;left:16px;display:flex;align-items:center;gap:8px}
+.nav-avatar{width:28px;height:28px;border-radius:999px;object-fit:cover;border:1px solid rgba(0,0,0,0.76)}
+.nav-name{font-weight:700}
+.ios-nav .nav-center{font-weight:900;letter-spacing:-.02em}
+.brand-title{background:linear-gradient(90deg,var(--tint),#7af);-webkit-background-clip:text;background-clip:text;color:transparent}
+.ios-large-title{font-size:clamp(1.6rem,2.4vw,2.2rem);font-weight:800;padding:8px 16px 10px}
 
-/* Small helpers */
-.tag{display:inline-block;padding:4px 8px;border-radius:999px;background:rgba(255,255,255,0.06);font-size:12px}
-.mt-2{margin-top:.5rem}
+/* Search */
+.ios-search{display:flex;align-items:center;gap:.5rem;height:40px;padding:0 12px;margin:6px 16px;border-radius:12px}
+.ios-search input{flex:1;border:0;background:transparent;color:inherit;outline:none}
+
+/* Cards and buttons */
+.ios-card{padding:16px}
+button,.btn,a.button{height:44px;padding:0 16px;border-radius:12px;border:0;background:var(--tint);color:#fff;font-weight:700;cursor:pointer}
+button:hover{background:var(--tint-pressed)}
+button.ghost,.ghost{background:transparent;border:1px solid rgba(255,255,255,0.18);color:#fff}
+input,select,textarea{background:var(--fill);color:inherit;border:1px solid rgba(255,255,255,0.18);border-radius:12px;padding:10px 12px;outline:none}
 .secondary{color:var(--secondary);font-size:14px}
+.tag{display:inline-block;padding:4px 8px;border-radius:999px;background:var(--fill);font-size:12px}
