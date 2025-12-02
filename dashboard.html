@@ -1,39 +1,152 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <title>GEAR HUB — Dashboard</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1, viewport-fit=cover">
-  <link rel="stylesheet" href="ios-theme.css">
-  <link rel="stylesheet" href="gear-hub.css">
-  <link rel="stylesheet" href="styles.css">
-  <script defer src="ios-ui.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="ui-theme.css">
+  <script defer src="nav.js"></script>
 </head>
 <body>
-  <header class="ios-nav glass">
-    <div class="bar">
-      <div class="brand"><div class="logo"></div><span class="brand-title">GEAR HUB</span></div>
-      <nav style="display:flex;gap:10px">
-        <a href="notes.html" class="ghost">Notes</a>
-        <a href="timetable.html" class="ghost">Timetable</a>
-        <a href="events.html" class="ghost">Events</a>
-        <a href="pomodoro.html" class="ghost">Pomodoro</a>
-        <a href="chat.html" class="ghost">Chat</a>
-        <a href="profile.html" class="ghost">Profile</a>
-      </nav>
-    </div>
-    <div class="ios-large-title">Dashboard</div>
-  </header>
+  <div class="app">
+    <!-- Left Sidebar -->
+    <aside class="sidebar">
+      <div class="brand-row">
+        <div class="brand-logo">⚙️</div>
+        <div class="brand-info">
+          <div class="brand-name">GEAR HUB</div>
+          <div class="brand-sub">Learn. Collaborate. Excel.</div>
+        </div>
+      </div>
 
-  <main class="container">
-    <section class="grid grid-3">
-      <a class="ios-card glass card link-card" href="notes.html"><h3>Notes</h3><p class="secondary">Upload & share study notes</p></a>
-      <a class="ios-card glass card link-card" href="timetable.html"><h3>Timetable</h3><p class="secondary">Personal weekly schedule</p></a>
-      <a class="ios-card glass card link-card" href="events.html"><h3>Events</h3><p class="secondary">School events & deadlines</p></a>
-      <a class="ios-card glass card link-card" href="pomodoro.html"><h3>Pomodoro</h3><p class="secondary">Focus timer</p></a>
-      <a class="ios-card glass card link-card" href="chat.html"><h3>Chat</h3><p class="secondary">Classroom chat with mentions</p></a>
-      <a class="ios-card glass card link-card" href="profile.html"><h3>Profile</h3><p class="secondary">Upload avatar & iMeet</p></a>
-    </section>
-  </main>
+      <nav class="nav" aria-label="Primary">
+        <a href="dashboard.html" class="active"><span class="icon">🏠</span> Dashboard</a>
+        <a href="notes.html"><span class="icon">📝</span> Notes</a>
+        <a href="timetable.html"><span class="icon">📆</span> Timetable</a>
+        <a href="events.html"><span class="icon">📅</span> Events</a>
+        <a href="homework.html"><span class="icon">📚</span> Homework</a>
+        <a href="quiz.html"><span class="icon">🎯</span> Quizzes</a>
+        <a href="marks.html"><span class="icon">🏅</span> Marks</a>
+        <a href="chat.html"><span class="icon">💬</span> Chat</a>
+        <a href="task-checklist.html"><span class="icon">✅</span> Tasks</a>
+      </nav>
+
+      <div class="sidebar-user">
+        <div class="user-card">
+          <img class="user-avatar" id="navAvatar" src="assets/pfp.png" alt="Avatar">
+          <div class="user-meta">
+            <div class="user-name" id="navName">Arjun</div>
+            <div class="user-role">Engineering • Admin</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+      <div class="topbar">
+        <div class="top-left">
+          <div class="page-title">Good evening, <span class="username-accent" id="greetName">Arjun</span></div>
+        </div>
+        <div class="top-right">
+          <a class="button" href="calendar.html">View Calendar</a>
+        </div>
+      </div>
+      <div class="sub muted" style="color:var(--muted); margin-top:4px;">
+        <span id="todayDate">Tuesday, December 2, 2025</span>
+      </div>
+
+      <!-- Stats -->
+      <section class="stats">
+        <div class="card">
+          <div class="card-head">
+            <span>Study Time</span>
+            <span class="pill">⏱️</span>
+          </div>
+          <div class="metric" id="studyTime">0h 0m</div>
+          <div class="sub">This month</div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span>Quiz Score</span>
+            <span class="pill" style="color:#d1fae5; background:rgba(16,185,129,0.14); border-color:rgba(16,185,129,0.35)">🎯</span>
+          </div>
+          <div class="metric" id="quizScore">0%</div>
+          <div class="sub">Average</div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span>Notes</span>
+            <span class="pill" style="color:#c7d2fe; background:rgba(99,102,241,0.14); border-color:rgba(99,102,241,0.35)">📘</span>
+          </div>
+          <div class="metric" id="notesCount">0</div>
+          <div class="sub">Total uploaded</div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <span>Pending Tasks</span>
+            <span class="pill" style="color:#fde68a; background:rgba(234,179,8,0.14); border-color:rgba(234,179,8,0.35)">☑️</span>
+          </div>
+          <div class="metric" id="tasksPending">0</div>
+          <div class="sub">of <span id="tasksTotal">0</span> total</div>
+        </div>
+      </section>
+
+      <!-- Panels -->
+      <section class="panels">
+        <div class="card">
+          <div class="panel-head">
+            <div class="panel-title">Upcoming Events</div>
+            <a class="panel-link" href="events.html">View all →</a>
+          </div>
+          <div class="panel-body" id="eventsPanel">
+            <div>
+              <div class="empty-icon">🗓️</div>
+              <div>No upcoming events</div>
+              <div style="margin-top:6px;"><a href="events.html" class="panel-link">Add an event</a></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="panel-head">
+            <div class="panel-title">Tasks</div>
+            <a class="panel-link" href="task-checklist.html">View all →</a>
+          </div>
+          <div class="panel-body" id="tasksPanel">
+            <div>
+              <div class="empty-icon">☑️</div>
+              <div>No pending tasks</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Recent Notes (optional) -->
+      <section class="card" style="margin-top:18px;">
+        <div class="panel-head">
+          <div class="panel-title">Recent Notes</div>
+          <a class="panel-link" href="notes.html">View all →</a>
+        </div>
+        <div class="list" id="recentNotes"></div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // Fill greeting name from localStorage user
+    (function(){
+      try {
+        const u = JSON.parse(localStorage.getItem('user')||'{}');
+        document.getElementById('greetName').textContent = u.username || 'Arjun';
+        document.getElementById('navName').textContent = u.username || 'Arjun';
+      } catch(e){}
+      const d = new Date();
+      document.getElementById('todayDate').textContent = d.toLocaleDateString(undefined, { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+    })();
+  </script>
 </body>
 </html>
