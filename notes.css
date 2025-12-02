@@ -1,8 +1,3 @@
-.notes-list, .summaries-list { display:grid; gap:12px; }
-.note-card, .summary-card {
-  padding:12px;border-radius:14px;box-shadow:var(--shadow);border:1px solid rgba(188,170,170,1);
-  background: rgba(188,170,170,0.28);
-}
+.notes-list,.summaries-list{display:grid;gap:12px}
+.note-card,.summary-card{padding:12px;border-radius:14px;background:rgba(0,0,0,0.27);backdrop-filter:blur(3.4px);-webkit-backdrop-filter:blur(3.4px);border:1px solid rgba(0,0,0,0.76);box-shadow:var(--shadow)}
 .note-meta{color:var(--secondary);font-size:13px}
-.summary-footer{display:flex;justify-content:flex-end;gap:8px}
-.tag{margin-right:6px}
